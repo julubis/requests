@@ -40,7 +40,7 @@ func Requests() *Request {
 
 	jar, _ := cookiejar.New(nil)
 	req.Client.Jar = jar
-	req.Client.Jar.SetCookies(req.httpreq.URL, req.Cookies)
+// 	req.Client.Jar.SetCookies(req.httpreq.URL, req.Cookies)
 	return req
 }
 func (req *Request) SetCookie(cookie *http.Cookie) {
@@ -54,7 +54,7 @@ func (req *Request) Get(origurl string) (resp *Response) {
 	parseUrl, _ := url.Parse(origurl)
 	req.httpreq.URL = parseUrl
 
-	// req.Client.Jar.SetCookies(req.httpreq.URL, req.Cookies)
+	req.Client.Jar.SetCookies(req.httpreq.URL, req.Cookies)
 	res, _ := req.Client.Do(req.httpreq)
 	resp = &Response{}
 	resp.R = res
@@ -72,7 +72,7 @@ func (req *Request) PostJson(origurl string, str_json string) (resp *Response) {
 	URL, _ := url.Parse(origurl)
 	req.httpreq.URL = URL
 
-	// req.Client.Jar.SetCookies(req.httpreq.URL, req.Cookies)
+	req.Client.Jar.SetCookies(req.httpreq.URL, req.Cookies)
 	res, _ := req.Client.Do(req.httpreq)
 
 	// clear post  request information
